@@ -343,7 +343,7 @@ if __name__ == '__main__':
     # necesaria y la transformación de formato de los landmarks de cada método
     #
     ##########################################################################  
-    os.chdir('./Evaluacion 2')
+    os.chdir('/home/angel/Escritorio/Informatica/TFG/Evaluacion 2')
     
     if not os.path.isdir('./lmk_truth_vrn'):
         sys.exit("Debe existir un fichero llamado lmk_truth_vrn con los landmarks\
