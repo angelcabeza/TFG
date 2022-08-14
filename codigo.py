@@ -10,12 +10,12 @@ import numpy as np
 import pandas as pd
 import os
 import glob
-from pandas.api.types import CategoricalDtype
-import math
 import matplotlib.pyplot as plt
 import seaborn as sns
 import filter_gt_landmarks
 import sys
+
+
 def compute_rigid_alignment(grundtruth_landmark_points, predicted_mesh_landmark_points, landmarks_transformation):
     """
     Computes the rigid alignment between the 
@@ -404,6 +404,7 @@ if __name__ == '__main__':
     #
     ##########################################################################
     dic = create_dict_name()
+
     GT_df_VRN = read_GT_PP_from_csv(dic, "./lmk_truth_vrn")
     PREDICTED_df_VRN = read_predicted_lmk_from_csv(dic, "./predicted_lmks/VRN", GT_df_VRN)
     GT_df_DECA = read_GT_PP_from_csv(dic, "./lmk_truth_deca")
@@ -524,6 +525,7 @@ if __name__ == '__main__':
     error_df_P2V.to_csv('./results/P2V/error_exp2.csv', sep='\t')
     error_df_VRN.to_excel('./results/VRN/error_exp2.xlsx')
     error_df_VRN.to_csv('./results/VRN/error_exp2.csv', sep='\t')
+
 # =============================================================================
 #     print("Landmarks con dist > 5: ", error_df[error_df.dst_euclidea > 5].shape)
 #     print("Landmarks con dist < 5: ", error_df[error_df.dst_euclidea < 5].shape)

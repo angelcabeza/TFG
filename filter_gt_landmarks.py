@@ -36,6 +36,7 @@ def get_landmark_name(line):
 
 def get_predicted_landmarks(predicted_lmk_path):
     predicted_lmk_dict = {}
+
     file = open(predicted_lmk_path, "r")
     
     keep_reading = True
@@ -62,8 +63,7 @@ def get_predicted_landmarks(predicted_lmk_path):
     return predicted_lmk_dict
 
 
-def filter_pp_file(reference_lmks, file_to_filter, filter_file):
-    
+def filter_pp_file(reference_lmks, file_to_filter, filter_file):  
     for key in reference_lmks:
         lmk_point = reference_lmks[key].replace("'", "")
         reference_lmks[key] = lmk_point

@@ -1,0 +1,59 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+Script para filtrar los landmarks ground_truth de la segunda evaluación de
+manera que tanto los landmarks ground_truth como los predichos sean los mismos.
+"""
+
+def get_predicted_landmarks(predicted_lmk_path):
+    predicted_lmk_dict = {}
+    file = open(predicted_lmk_path, "r")
+    
+    keep_reading = True
+    cont = 1
+    
+    while(keep_reading):
+        line = file.readline()
+        
+        # Si llegamos al final del fichero paramos de leer
+        if "</PickedPoints>" in line:
+            keep_reading = False
+        
+        # Miramos si estamos en la parte del fichero correspondiente 
+        # a los landmarks
+        if (keep_reading and "point" in line):
+            i = 0
+            encontrado = False
+            print("Line: ", line)
+            while (i < (len(line) - 5) and not encontrado):
+                print(line[i:i+5], )
+                
+                # Comprobamos si estamos leyendo el nombre del punto
+                # y lo guardamos en una lista caracter por caracter
+                if (line[i:i+5] == "name="):
+                    lmk_name = []
+                    cont2 = i+6
+                    j = 0
+                    while j < 100 and not encontrado:
+                        if (line[cont2] != '"'):
+                            lmk_name.append(line[cont2])
+                            cont2 += 1
+                        else:
+                            encontrado = True
+                
+                i+=1
+                    
+            # Convertimos la lista a string y la almacenamos en
+            # el diccionario
+            lmk_name_string = ''.join(lmk_name)
+            predicted_lmk_dict[cont] = lmk_name_string
+            cont+=1
+            
+    return predicted_lmk_dict
+    
+
+
+if __name__ == '__main__':
+    predicted_landmarks = get_predicted_landmarks("/home/angel/Escritorio/EvalDataset2/DECA/landmarks/Aila.pp")
+
+
