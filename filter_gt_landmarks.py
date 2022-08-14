@@ -103,9 +103,6 @@ def filter_predicted_pp_file(reference_lmks, file_to_filter, filter_file):
         lmk_point = reference_lmks[key].replace("'", "")
         reference_lmks[key] = lmk_point
         
-    if "Enrique" in file_to_filter:
-        print(reference_lmks)
-        
     reading_file = open(file_to_filter, "r")
     writing_file = open(filter_file, "w")
     
