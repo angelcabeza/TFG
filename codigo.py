@@ -358,25 +358,23 @@ if __name__ == '__main__':
         sys.exit("Debe existir un fichero llamado lmk_truth_p2v con los landmarks\
               verdaderos del modelo P2V")
     
-    
-    num_csv_files = len(glob.glob1('./lmk_truth_deca',"*.csv"))
-    
-    folder_preparation_deca = need_preparation('DECA', './lmk_truth_deca', "ground truth")
-    folder_preparation_mvfnet = need_preparation('MVFNET', './lmk_truth_mvfnet', "ground truth")
-    folder_preparation_p2v = need_preparation('P2V', './lmk_truth_p2v', "ground truth")
-    folder_preparation_vrn = need_preparation('VRN', './lmk_truth_vrn', "ground truth")
+        
+    folder_preparation_deca = need_preparation('DECA', './gt_lmks/DECA', "ground truth")
+    folder_preparation_mvfnet = need_preparation('MVFNET', './gt_lmks/MVFNET', "ground truth")
+    folder_preparation_p2v = need_preparation('P2V', './gt_lmks/P2V', "ground truth")
+    folder_preparation_vrn = need_preparation('VRN', './gt_lmks/VRN', "ground truth")
     
     if folder_preparation_deca:
-        folder_preparation("./lmk_truth_deca", "./predicted_lmks/DECA")
+        folder_preparation('./gt_lmks/DECA', "./predicted_lmks/DECA")
     
     if folder_preparation_mvfnet:
-        folder_preparation("./lmk_truth_mvfnet", "./predicted_lmks/MVFNET")   
+        folder_preparation('./gt_lmks/MVFNET', "./predicted_lmks/MVFNET")   
         
     if folder_preparation_p2v:
-        folder_preparation("./lmk_truth_p2v", "./predicted_lmks/P2V")   
+        folder_preparation('./gt_lmks/P2V', "./predicted_lmks/P2V")   
         
     if folder_preparation_vrn:
-        folder_preparation("./lmk_truth_vrn", "./predicted_lmks/VRN")   
+        folder_preparation('./gt_lmks/VRN', "./predicted_lmks/VRN")   
         
     
     folder_predicted_preparation_deca = need_preparation('DECA', "./predicted_lmks/DECA", "predicted")
@@ -405,13 +403,13 @@ if __name__ == '__main__':
     ##########################################################################
     dic = create_dict_name()
 
-    GT_df_VRN = read_GT_PP_from_csv(dic, "./lmk_truth_vrn")
+    GT_df_VRN = read_GT_PP_from_csv(dic, './gt_lmks/VRN')
     PREDICTED_df_VRN = read_predicted_lmk_from_csv(dic, "./predicted_lmks/VRN", GT_df_VRN)
-    GT_df_DECA = read_GT_PP_from_csv(dic, "./lmk_truth_deca")
+    GT_df_DECA = read_GT_PP_from_csv(dic, './gt_lmks/DECA')
     PREDICTED_df_DECA = read_predicted_lmk_from_csv(dic, "./predicted_lmks/DECA", GT_df_DECA)
-    GT_df_P2V = read_GT_PP_from_csv(dic, "./lmk_truth_p2v")
+    GT_df_P2V = read_GT_PP_from_csv(dic, './gt_lmks/P2V')
     PREDICTED_df_P2V = read_predicted_lmk_from_csv(dic, "./predicted_lmks/P2V", GT_df_P2V)
-    GT_df_MVFNET = read_GT_PP_from_csv(dic, "./lmk_truth_mvfnet")
+    GT_df_MVFNET = read_GT_PP_from_csv(dic, './gt_lmks/MVFNET')
     PREDICTED_df_MVFNET = read_predicted_lmk_from_csv(dic, "./predicted_lmks/MVFNET", GT_df_MVFNET)
 
     ##########################################################################

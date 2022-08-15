@@ -139,6 +139,9 @@ def filter_predicted_pp_file(reference_lmks, file_to_filter, filter_file):
     reading_file.close()
 
 def pp_to_txt (file_to_open, file_to_create, ground_truth_pp):
+    
+    print("FILE TO OPEN: ", file_to_open)
+    print("File to create: ", file_to_create)
     f = open(file_to_open, 'r')
     fw = open(file_to_create, 'w')
     lista = [''] * (len(ground_truth_pp))
