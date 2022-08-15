@@ -40,4 +40,3 @@
 <point active="1" x="-39.83238903078901" y="101.72812351188004" z="-34.264777710028284" name="Frontotemporale' R"/>
 <point active="1" x="-73.24563365110367" y="45.00766889017404" z="-114.88248323655102" name="Otobasion Inferius' R"/>
     </PickedPoints>
-    

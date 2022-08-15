@@ -30,4 +30,3 @@
 <point active="1" x="96.69942676245716" y="-29.708954064636092" z="-146.0147685331066" name="Otobasion Inferius' L"/>
 <point active="1" x="95.5474037404262" y="1.310900293688178" z="-114.80183184658881" name="Zygion' L"/>
     </PickedPoints>
-    

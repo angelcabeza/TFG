@@ -38,4 +38,3 @@
 <point active="1" x="46.60981116911529" y="-15.302597740332818" z="15.973052187464578" name="Gonion' L"/>
 <point active="1" x="23.21420755115445" y="79.97984961729068" z="67.93747703146681" name="Midsupraorbital' L"/>
     </PickedPoints>
-    

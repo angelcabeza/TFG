@@ -28,4 +28,3 @@
 <point active="1" x="78.67512286173546" y="31.98486789507372" z="-86.24520048745703" name="Frontozygomaticus' L"/>
 <point active="1" x="-45.38783194497263" y="24.516748431703576" z="-93.1207982869193" name="Frontozygomaticus' R"/>
     </PickedPoints>
-    

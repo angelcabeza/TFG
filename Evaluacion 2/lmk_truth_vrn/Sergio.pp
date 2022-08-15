@@ -32,4 +32,3 @@
 <point active="1" x="-5.810661627658722" y="25.205737913968" z="-16.665378723987885" name="Pronasale'"/>
 <point active="1" x="7.346726995017268" y="64.94874783534382" z="-54.88808233491625" name="Endocanthion' L"/>
     </PickedPoints>
-    

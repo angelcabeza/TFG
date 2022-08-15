@@ -6,8 +6,6 @@
     <DataFileName name = "AveragedAveragedTemplate_0"/>
     <templateName name = "o1.pptpl"/>
     </DocumentData>
-<point active="1" x="77.53638854078241" y="18.010727717539886" z="-16.473737418025337" name="Tragion L"/>
-<point active="1" x="-62.7336073531489" y="14.490518432489097" z="-16.857900823219495" name="Tragion R"/>
 <point active="1" x="8.793898999680204" y="39.499723038170174" z="77.39423987943508" name="Nasion'"/>
 <point active="1" x="8.476256986421593" y="52.1744484251918" z="77.23274064109489" name="Glabella"/>
 <point active="1" x="10.244653772501202" y="-18.90055901300721" z="82.8186219815866" name="Subnasale'"/>
@@ -40,4 +38,3 @@
 <point active="1" x="-57.466833435376714" y="-9.162712733641598" z="-15.217567708365266" name="Otobasion Inferius' R"/>
 <point active="1" x="72.90133600342841" y="-9.488621806594558" z="-12.341755855913846" name="Otobasion Inferius' L"/>
     </PickedPoints>
-    

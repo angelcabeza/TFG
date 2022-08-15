@@ -32,4 +32,3 @@
 <point active="1" x="-27.50447132486014" y="76.25643743913852" z="-8.253172106819136" name="Frontotemporale' R"/>
 <point active="1" x="47.04569579565329" y="68.53312682961993" z="-12.195051655429495" name="Midsupraorbital' L"/>
     </PickedPoints>
-    

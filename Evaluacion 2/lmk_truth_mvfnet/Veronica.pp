@@ -38,4 +38,3 @@
 <point active="1" x="75.48418736926055" y="-50.520608557338875" z="-63.21360474931075" name="Otobasion Inferius' L"/>
 <point active="1" x="-59.56014297060511" y="-63.806890562008505" z="-66.76326950599082" name="Otobasion Inferius' R"/>
     </PickedPoints>
-    

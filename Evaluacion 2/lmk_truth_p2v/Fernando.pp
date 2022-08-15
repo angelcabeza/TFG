@@ -23,4 +23,3 @@
 <point active="1" x="-37.28066692873808" y="39.07295204329841" z="116.56026367124457" name="Midsupraorbital' R"/>
 <point active="1" x="-4.4885903616449365" y="50.43264364952611" z="123.6596899519775" name="Glabella"/>
     </PickedPoints>
-    

@@ -35,4 +35,3 @@
 <point active="1" x="69.33560892922043" y="-26.495830924620755" z="-73.71929802785593" name="Gonion' L"/>
 <point active="1" x="71.49981301448815" y="1.7384961939490062" z="-100.0831380857399" name="Otobasion Inferius' L"/>
     </PickedPoints>
-    

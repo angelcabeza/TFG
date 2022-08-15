@@ -32,4 +32,3 @@
 <point active="1" x="-38.78623055574844" y="26.679320930109554" z="31.6460866935401" name="Midsupraorbital' R"/>
 <point active="1" x="-6.070792889361435" y="-67.74685626160925" z="45.39042879813127" name="Supramentale'"/>
     </PickedPoints>
-    

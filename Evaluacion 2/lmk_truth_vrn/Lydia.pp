@@ -32,4 +32,3 @@
 <point active="1" x="-21.159650779736182" y="-58.63713513421533" z="12.844764457551662" name="Cheilion' R"/>
 <point active="1" x="-53.69837166917221" y="17.87581666925624" z="-4.2315706781510585" name="Frontozygomaticus' R"/>
     </PickedPoints>
-    

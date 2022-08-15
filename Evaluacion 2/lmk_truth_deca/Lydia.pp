@@ -40,4 +40,3 @@
 <point active="1" x="-53.69837166917221" y="17.87581666925624" z="-4.2315706781510585" name="Frontozygomaticus' R"/>
 <point active="1" x="-63.2344193176869" y="-23.50153022196369" z="-30.923495379352634" name="Zygion' R"/>
     </PickedPoints>
-    

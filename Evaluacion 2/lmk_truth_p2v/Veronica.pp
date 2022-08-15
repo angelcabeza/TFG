@@ -29,4 +29,3 @@
 <point active="1" x="42.26686856541585" y="30.097860293404125" z="9.024911829518828" name="Frontotemporale' L"/>
 <point active="1" x="-49.849880824060826" y="20.764722739359343" z="3.9340004899881933" name="Frontotemporale' R"/>
     </PickedPoints>
-    

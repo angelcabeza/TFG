@@ -26,4 +26,3 @@
 <point active="1" x="4.251281504281231" y="60.21371443720657" z="61.7145256170885" name="Endocanthion' L"/>
 <point active="1" x="23.21420755115445" y="79.97984961729068" z="67.93747703146681" name="Midsupraorbital' L"/>
     </PickedPoints>
-    
