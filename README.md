@@ -4,7 +4,7 @@ Generación de modelos faciales 3D a partir de fotografías: Estudio de viabilid
 
 Este repositorio contiene todos los ficheros necesarios para realizar las dos evaluaciones realizadas en este trabajo:
 
-  1. Análiss denso: realizado a partir de la evaluación NoW: https://github.com/soubhiksanyal/now_evaluation
+  1. Análiss denso: realizado a partir de la evaluación NoW: https://github.com/soubhiksanyal/now_evaluation.
   2. Análisis a nivel de landmark: evaluación a nivel de landmark de todos los modelos.
 
 
@@ -18,7 +18,7 @@ El código de los métodos escogidos y sus respectivas guías de instalación se
   
   
 # Guía de uso 
-Ambas evaluaciones están totalmente automatizadas. Para ejecutar la evaluación 2 hay que utilizar el siguiente comando:
+Ambas evaluaciones están totalmente automatizadas, sin embargo para poder utilizar la evaluación de NoW hay que realizar la instalación del entorno necesario (https://github.com/soubhiksanyal/now_evaluation para más información). Para ejecutar la evaluación 2 hay que utilizar el siguiente comando:
 
     python ./codigo.py
                                                      
