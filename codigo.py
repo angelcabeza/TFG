@@ -16,6 +16,10 @@ import filter_gt_landmarks
 import sys
 
 
+"""
+Estas dos funciones están tomadas directamente de la evaluación Now
+"""
+
 def compute_rigid_alignment(grundtruth_landmark_points, predicted_mesh_landmark_points, landmarks_transformation):
     """
     Computes the rigid alignment between the 
@@ -149,7 +153,12 @@ def procrustes(X, Y, scaling=True, reflection='best'):
     return d, Z, tform
 
 
-    
+
+
+"""
+    Funcion que crea un diccionario que relaciona los nombres de los modelos
+    con su nombre técnico
+""" 
 def create_dict_name():
     dic = {}
     dic['Fernando'] = 'DID1'
@@ -170,8 +179,16 @@ def create_dict_name():
     
     return dic
 
+
+"""
+    Función que a partir de una ruta al directorio que contiene los landmarks
+    en formato .csv es capaz de leer los landmarks ground truth de los ficheros
+    y almacenarlos en un dataframe.
+    
+        :param dic: Diccionario con los nombres de los modelos
+        :param path: Ruta a la carpeta que contiene los landmarks en formato .csv
+"""
 def read_GT_PP_from_csv(dic, path):
-    #csv_path = "/home/angel/Escritorio/NowDatasetExp2/lmk_truth_vrn"
     df_list = []
     
     for lmk_file in os.listdir(path):
@@ -187,8 +204,20 @@ def read_GT_PP_from_csv(dic, path):
 
     return df_all_lmks
 
+
+"""
+    Función que a partir de una ruta al directorio que contiene los landmarks
+    en formato .csv es capaz de leer los landmarks predicted de los ficheros
+    y almacenarlos en un dataframe de tal manera que ya estén alineados con los
+    landmarks ground truth.
+    
+        :param dic: Diccionario con los nombres de los modelos
+        :param csv_path: Ruta a la carpeta que contiene los landmarks en formato .csv
+        :param GT_DF: Dataframe con los landmarks ground truth
+"""
 def read_predicted_lmk_from_csv(dic, csv_path, GT_DF):
     df_list = []
+    # Lista con los landmarks que se utilizan para calcular la alineacion
     lista_landmarks = ["AlareL","AlareR", "CheilionR", "CheilionL",
                        "EndocanthionL", "EndocanthionR", "FrontotemporaleL",
                        "FrontotemporaleR", "Glabella", "Gnathion", 
@@ -197,20 +226,28 @@ def read_predicted_lmk_from_csv(dic, csv_path, GT_DF):
                        "Stomion","Subnasale", "Supramentale","TragionL",
                        "TragionR", "ZygionL", "ZygionR"]
     
+    # Para cada archivo con el formato .csv dentro de la ruta almacenada en
+    # la variable csv_path
     for lmk_file in os.listdir(csv_path):
         
         if lmk_file[-3:] == "csv":
+            
+            # Leemos los landmarks del fichero y los almacenamos con el mismo
+            # orden que los ground truth
             df = pd.read_csv(csv_path + "/" + lmk_file)
             df = df[['lmk_name', 'x_coord', 'y_coord', 'z_coord']]
             
-            # Align predicted_landmarks in the space of ground truth landmarks
             landmarks_transformation = df[['lmk_name','x_coord','y_coord', 'z_coord']].to_numpy()
             gt_df_modelo = GT_DF.loc[dic[lmk_file[:-4]]]
             ground_truth_landmarks = gt_df_modelo[['lmk_name','x_coord','y_coord', 'z_coord']].to_numpy()
             
+            # Convertimos los dataframes a listas
             landmarks_transformation = landmarks_transformation.tolist()
             ground_truth_landmarks = ground_truth_landmarks.tolist()
             
+            # Eliminamos caracteres extraños y espacios de los nombrs de los 
+            # landmarks y elimniamos aquellos que no están en la lista de landmarks
+            # utilizados para la alineación
             for element in landmarks_transformation:
                 a = element[0].replace("'", "")
                 a = a.replace(" ", "")
@@ -234,6 +271,7 @@ def read_predicted_lmk_from_csv(dic, csv_path, GT_DF):
             for element in ground_truth_landmarks:
                 ground_truth_landmarks_1.append(element[1:])
                 
+            # ALineamos los modelos y los guardamos en un dataframe
             landmarks_transformation = np.array(landmarks_transformation_1)
             predicted_landmarks = df[['x_coord','y_coord', 'z_coord']].to_numpy()
             predicted_landmarks = compute_rigid_alignment(ground_truth_landmarks_1, predicted_landmarks,landmarks_transformation)
@@ -246,7 +284,16 @@ def read_predicted_lmk_from_csv(dic, csv_path, GT_DF):
     df_all_lmks = pd.concat(df_list)
     
     
+    # Devolvemos el dataframe
     return df_all_lmks
+
+"""
+    Función que a partir de los dataframes con los landmarks predicted y gt
+    alineados calcula el error (distancia euclídea) y los almacena en un dataframe
+    
+        :param gt_df: Dataframe con los landmarks ground truth
+        :param predicted_df: Dataframe con los landmarks predicted
+"""
 
 def get_error_dataframe(gt_df, predicted_df):
     distance_df = predicted_df.iloc[:, :1]
@@ -261,12 +308,24 @@ def get_error_dataframe(gt_df, predicted_df):
     return distance_df
 
 
+"""
+    Función que a partir del dataframe con el error calcula los estadísticos 
+    agrupados por modelo
+    
+        :param error_df: Dataframe con los errores por landmark
+"""
 def estadisitcos_modelo(error_df):
     data = error_df.groupby('Modelo')
     
     return data.describe()
 
 
+"""
+    Función que a partir del dataframe con el error calcula los estadísticos 
+    agrupados por landmark
+    
+        :param error_df: Dataframe con los errores por landmark
+"""
 def estadisticos_landmark_modelo(error_df):
     df = error_df[['lmk_name','dst_euclidea']]
     
@@ -274,11 +333,25 @@ def estadisticos_landmark_modelo(error_df):
     return data.describe()
 
 
+"""
+    Función que a partir del dataframe con el error calcula los estadísticos 
+    generales
+    
+        :param error_df: Dataframe con los errores por landmark
+"""
 def estadisticos_todos_lmks_todos_modelos(error_df):
     
     return error_df['dst_euclidea'].describe()
 
-
+"""
+    Función que comprueba si una carpeta con los landmarks de un método necesita
+    de alguna preparación o ya está todo preparado
+    
+        :param method: Nombre del método
+        :param folder_path: ruta a la carpeta que se desea revisar
+        :param lmk_type: booleano para indicar si son landmarks ground truth o
+        predicted
+"""
 def need_preparation(method, folder_path, lmk_type):
     num_csv_files = len(glob.glob1(folder_path,"*.csv"))
     
@@ -299,8 +372,16 @@ def need_preparation(method, folder_path, lmk_type):
                 
     return folder_preparation
     
-    
 
+"""
+    Función que realiza la preparación necesaria para efectuar las evaluaciones
+    de un método concreto
+    
+        :param folder_path: ruta a la carpeta que se desea preparar (carpeta con
+                            los landmarks ground truth)
+        :param predicted_lmks_path: ruta a la carpeta que contiene los landmarks
+                                    predicted
+"""
 def folder_preparation(folder_path, predicted_lmks_path):
     for file in os.listdir(folder_path):
         if "filtered_" in file:
@@ -320,6 +401,15 @@ def folder_preparation(folder_path, predicted_lmks_path):
             filter_gt_landmarks.pp_to_csv(created_file)
 
 
+"""
+    Función que realiza la preparación necesaria para efectuar las evaluaciones
+    de un método concreto
+    
+        :param folder_path: ruta a la carpeta que se desea preparar (carpeta con
+                            los landmarks predicted)
+        :param gt_lmks_path: ruta a la carpeta que contiene los landmarks
+                                    ground truth
+"""
 def predicted_landmark_preparation(folder_path, gt_lmks_path):
     for file in os.listdir(folder_path):
         if file.endswith('.pp'):
@@ -334,9 +424,7 @@ def predicted_landmark_preparation(folder_path, gt_lmks_path):
         if "filtered" in file:
             filter_gt_landmarks.pp_to_csv(folder_path + '/' + file)
     
-if __name__ == '__main__':
-    #convert_pp_to_csv('/home/angel/Escritorio/NowDatasetExp2/lmk_truth')
-    
+if __name__ == '__main__':    
     ##########################################################################
     #
     # Bloque de código para la preparación automática de la estructura de carpetas
@@ -489,6 +577,11 @@ if __name__ == '__main__':
     plt.show()
     
     
+    
+    ##########################################################################
+    # Creación de ficheros con tablas con las distintas estadísticas obtenidas
+    ##########################################################################
+    
     methods = ["DECA", "MVFNET", "P2V", "VRN"]
     
     for method in methods:
@@ -523,39 +616,3 @@ if __name__ == '__main__':
     error_df_P2V.to_csv('./results/P2V/error_exp2.csv', sep='\t')
     error_df_VRN.to_excel('./results/VRN/error_exp2.xlsx')
     error_df_VRN.to_csv('./results/VRN/error_exp2.csv', sep='\t')
-
-# =============================================================================
-#     print("Landmarks con dist > 5: ", error_df[error_df.dst_euclidea > 5].shape)
-#     print("Landmarks con dist < 5: ", error_df[error_df.dst_euclidea < 5].shape)
-#     
-#     print("% de landmarks > 5: ", (error_df[error_df.dst_euclidea > 5].shape[0]*100)/483)
-#     print("% de landmarks < 5: ", (error_df[error_df.dst_euclidea < 5].shape[0]*100)/483)
-#     
-#     print("% de landmarks > 6: ", (error_df[error_df.dst_euclidea > 6].shape[0]*100)/483)
-#     print("% de landmarks < 6: ", (error_df[error_df.dst_euclidea < 6].shape[0]*100)/483)
-#     
-#     print("% de landmarks > 7: ", (error_df[error_df.dst_euclidea > 7].shape[0]*100)/483)
-#     print("% de landmarks < 7: ", (error_df[error_df.dst_euclidea < 7].shape[0]*100)/483)
-#     
-#     print("% de landmarks > 10: ", (error_df[error_df.dst_euclidea > 10].shape[0]*100)/483)
-#     print("% de landmarks < 10: ", (error_df[error_df.dst_euclidea < 10].shape[0]*100)/483)
-#     
-#     print("% de landmarks > 13: ", (error_df[error_df.dst_euclidea > 13].shape[0]*100)/483)
-#     print("% de landmarks < 13: ", (error_df[error_df.dst_euclidea < 13].shape[0]*100)/483)
-#     
-#     #print("% de landmarks > 15: ", (error_df[error_df.dst_euclidea > 15].shape[0]*100)/483)
-#     #print("% de landmarks < 15: ", (error_df[error_df.dst_euclidea < 15].shape[0]*100)/483)
-#     
-#     #print("% de landmarks > 20: ", (error_df[error_df.dst_euclidea > 20].shape[0]*100)/483)
-#     #print("% de landmarks < 20: ", (error_df[error_df.dst_euclidea < 20].shape[0]*100)/483)
-#     
-#     error_df[error_df.dst_euclidea > 13].to_csv("./lmk_error>13")
-#     
-#     error_df.loc[(error_df['dst_euclidea']>=10) & (error_df['dst_euclidea']<=13)].to_csv("./lmk_errorEntre10y13")
-#     
-#     #print(error_df[error_df.dst_euclidea < 5].to_string())
-#     
-#     #occur = error_df[error_df.dst_euclidea < 5].groupby(['lmk_name']).size()
-#     #display(occur)
-#     error_df.to_csv('./error_exp2.csv')
-# =============================================================================
